@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Debug_Shader
+  m_Name: Checker_Enemy
   m_Shader: {fileID: 4800000, guid: a6de1bf65b1fd6b4c95b5b0cc3b9d19e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -25,9 +25,9 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _Scale: 0.1
+    - _Scale: 0.4
     m_Colors:
-    - _Color: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
-    - _Color2: {r: 0.6509434, g: 0.6509434, b: 0.6509434, a: 1}
+    - _Color: {r: 0.34117648, g: 0.20392157, b: 0.20392157, a: 1}
+    - _Color2: {r: 0.6509804, g: 0.4862745, b: 0.4862745, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static GameManager;
 
 // Plane flying physics controller
 
@@ -14,12 +15,15 @@ public class PlaneController : MonoBehaviour
     [SerializeField] float turnGrip; // Strength of cancelling slide
     [SerializeField] float turnSensitivity; // Weight of turning
     [SerializeField] AnimationCurve steeringCurve; // Steering sensitivity relative to speed
+    [Space(5)]
 
     [Header("Visuals")]
     [SerializeField] Transform mesh;
     [SerializeField] AnimationCurve rollCurve;
     [SerializeField] float maxRollAngle;
     [SerializeField] float rollSensitivity;
+    [Space(5)]
+
 
     [Header("Input")]
     [SerializeField] InputActionReference steerAction;
@@ -41,12 +45,14 @@ public class PlaneController : MonoBehaviour
     {
         steerAction.action.Enable();
         throttleAction.action.Enable();
+        gm.RegisterPlayer(this);
     }
 
     private void OnDisable()
     {
         steerAction.action.Disable();
         throttleAction.action.Disable();
+        gm.UnregisterPlayer(this);
     }
 
     // Assign references from local components
