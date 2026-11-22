@@ -2,6 +2,8 @@ using UnityEngine;
 
 // Game Manager for storing global game data
 
+// By OS
+
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
@@ -21,7 +23,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
     public GameObject Player { get; private set; }
+
+    public Color playerColour;
+    public Color friendlyColour;
+    public Color enemyColour;
 
 
     private void Awake()

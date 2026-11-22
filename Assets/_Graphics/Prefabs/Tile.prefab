@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TileController
   tileMesh: {fileID: 8053890069769715990}
   tileMapUI: {fileID: 4114750847183205982}
+  basePrefab: {fileID: 7551059934601043089, guid: 5c8bd833448019c438436864dfe9bb05, type: 3}
 --- !u!114 &4114750847183205982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,10 +62,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 778e6871bff8f094191fd9d45a7be8e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapUI
+  scaler: 0
   overrideScaling: 1
   spriteSize: 0
   target: {fileID: 3246308734235312772}
   sprite: {fileID: 21300000, guid: 631f6b44899a49e43a88b53afa783ed5, type: 3}
+  material: {fileID: 0}
 --- !u!1 &1836935356439397806
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,7 +166,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 974f2441511d06a4e85b415c827776f4, type: 2}
+  - {fileID: 2100000, guid: 95a2bacb6288a4e4e85d33261347110c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

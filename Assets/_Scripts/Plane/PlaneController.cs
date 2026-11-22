@@ -29,11 +29,14 @@ public class PlaneController : MonoBehaviour
     [SerializeField] InputActionReference steerAction;
     [SerializeField] InputActionReference throttleAction;
 
+
+    public float Speed => rb.linearVelocity.magnitude;
+    public float Throttle { get; private set; }
+
     Rigidbody rb;
 
     Vector3 _localVelocity;
 
-    float _throttle;
     float _steerInput;
     float _localYaw;
 
@@ -90,7 +93,7 @@ public class PlaneController : MonoBehaviour
         _steerInput = steerAction.action.ReadValue<float>();
         float throttleInput = throttleAction.action.ReadValue<float>();
 
-        _throttle = Mathf.Clamp(_throttle + throttleInput * Time.deltaTime, 0.15f, 1f);
+        Throttle = Mathf.Clamp(Throttle + throttleInput * Time.deltaTime, 0.15f, 1f);
     }
 
     // Converts world space velocity to local
@@ -108,7 +111,7 @@ public class PlaneController : MonoBehaviour
     // Pushes plane forward based on throttle input
     void UpdateThrust()
     {
-        rb.AddRelativeForce(Vector3.forward * (_throttle * maxThrust));
+        rb.AddRelativeForce(Vector3.forward * (Throttle * maxThrust));
     }
 
     // Pushes plane angular velocity to induce turning 

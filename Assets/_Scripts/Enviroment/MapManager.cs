@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using static GameManager;
+using static ObjectFaction;
 
 // Map manager for generating the map based on player position
 
@@ -31,6 +32,11 @@ public class MapManager : MonoBehaviour
     [Header("Settings")]
     [SerializeField] int tileSize;
     [SerializeField] int generationRadius; // How many tiles around the player should be generated (1 = 3x3)
+    [Space(5)]
+
+    [SerializeField] float baseSpawnChance; // 0 - 1 chance to spawn a base on a tile
+    [SerializeField] int safeAreaRadius;
+    [Space(10)]
 
     [Header("References")]
     [SerializeField] TileController tilePrefab;
@@ -85,7 +91,9 @@ public class MapManager : MonoBehaviour
     // Convert Vector3 of the players position into Vector2Int based of the tile size
     Vector2Int WorldToChunk(Vector3 worldPos)
     {
-        return new Vector2Int(Mathf.FloorToInt(worldPos.x / tileSize), Mathf.FloorToInt(worldPos.z / tileSize));
+        return new Vector2Int(
+            Mathf.FloorToInt(worldPos.x / tileSize + 0.5f),
+            Mathf.FloorToInt(worldPos.z / tileSize + 0.5f));
     }
 
     // Generate chunks around the player
@@ -104,17 +112,22 @@ public class MapManager : MonoBehaviour
     }
 
     // Place a tile on the position
-    void PlaceTile(Vector2Int pos)
+    void PlaceTile(Vector2Int coord)
     {
-        TileController tile = Instantiate(tilePrefab, ChunkToWorld(pos), Quaternion.identity, tileParent);
+        TileController tile = Instantiate(tilePrefab, ChunkToWorld(coord), Quaternion.identity, tileParent);
         tile.SetSize(tileSize / 10);
-        _tiles.Add(pos, tile);
+        _tiles.Add(coord, tile);
+
+        if (coord == Vector2Int.zero)
+            tile.SpawnBase(Faction.Player, true);
+        else
+            tile.CheckSpawnBase(baseSpawnChance, safeAreaRadius);
     }
 
     // Return center of tile based on tile size
-    Vector3 ChunkToWorld(Vector2Int pos)
+    Vector3 ChunkToWorld(Vector2Int chunk)
     {
-        return new Vector3((pos.x + 0.5f) * tileSize, 0f, (pos.y + 0.5f) * tileSize);
+        return new Vector3(chunk.x * tileSize, 0f, chunk.y * tileSize);
     }
 
     // Public setter for current zoom
